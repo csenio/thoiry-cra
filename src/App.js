@@ -72,7 +72,7 @@ const H1 = styled.h1`
 `;
 
 const FormSection = styled.section`
-  background: #9effd3;
+  background: #66c9ff;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -103,6 +103,21 @@ const FormArticle = styled.article`
     height: 90px;
     border-radius: 4px;
     padding: 5px;
+  }
+
+  & button {
+    font-family: inherit;
+    font-weight: 500;
+    border: none;
+    background: #0046af;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 3px;
+    cursor: pointer;
+    &:hover {
+      background: #1d6bc4;
+    }
   }
 
   @media all and (max-width: 600px) {
