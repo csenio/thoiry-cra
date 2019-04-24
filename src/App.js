@@ -6,6 +6,8 @@ import "./fonts/Inter (web)/inter.css";
 import HEADPHOTO from "./images/Thoiry_15.jpg";
 import styled from "styled-components";
 import ImageModal from "./ImageModal";
+import messages from "./messages";
+import useLang from "./useLang";
 
 function importAll(r) {
   return r.keys().map(r);
@@ -125,9 +127,30 @@ const FormArticle = styled.article`
   }
 `;
 
+const Buttons = styled.div`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+  button {
+    padding: 5px;
+    font-family: inherit;
+    font-weight: 500;
+    background: ${p => p.theme.colors.grey};
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 2px;
+    &:active {
+      background: #bcbcbc;
+    }
+  }
+`;
+
 function App() {
   const [Modal, setModal] = useState(false);
   const [currentImageIndex, setCurrentImage] = useState(0);
+  const { setLang, lang } = useLang();
   const openModal = index => {
     setModal(true);
     setCurrentImage(index);
@@ -141,30 +164,28 @@ function App() {
     currentImageIndex > 0 && setCurrentImage(currentImageIndex - 1);
   };
 
+  const { title, content, price, contact, form } = messages[lang];
+
   return (
     <ThemeProvider theme={theme}>
       <Layout>
         <GlobalStyles />
         <main>
+          <Buttons>
+            <button onClick={() => setLang("fr")}>fr</button>
+            <button onClick={() => setLang("en")}>en</button>
+          </Buttons>
           <Section>
             <header>
               <Img src={HEADPHOTO} alt="house" />
             </header>
             <Article>
-              <H1>A louer à Thoiry, Pays de Gex (France)</H1>
-              <p>
-                Maison de caractère de 1850 (220m2) entiérement rénovée.
-                Magnifique jardin (1200m2) clôturé, ensoleillé et calme, belle
-                terrasse avec vue sur le Mont-Blanc et terasse couverte dans la
-                grange attaché à la maison. Grand salon/salle à manger (45 m2),
-                cuisine equipée, 5 chambres, 2 salles de bains, cave voutée,
-                garage, dépandances, chauffage à gaz. Proche du bus Y, grand
-                centre commercial, école primaire au village.
-              </p>
-              <H1 as="h1">Prix</H1>
-              <p>CHF 3400 (EUR 3000) par mois, disponible dès 16 juin 2019.</p>
-              <H1>Contact</H1>
-              <p>Henning Wuester, hwuester@yahoo.de, +491754789297</p>
+              <H1>{title}</H1>
+              <p>{content}</p>
+              <H1>{price.title}</H1>
+              <p>{price.content}</p>
+              <H1>{contact.title}</H1>
+              <p>{contact.content}</p>
             </Article>
           </Section>
           <ImgSection>
@@ -181,13 +202,13 @@ function App() {
             })}
           </ImgSection>
           <FormSection>
-            <H1>Contactez nous:</H1>
+            <H1>{form.title}</H1>
             <FormArticle>
               <form name="contact" method="post">
                 <input type="hidden" name="form-name" value="contact" />
                 <p>
                   <label for="name">
-                    Nom: <input required type="text" name="name" />
+                    {form.name} <input required type="text" name="name" />
                   </label>
                 </p>
                 <p>
@@ -201,7 +222,7 @@ function App() {
                   </label>
                 </p>
                 <p>
-                  <button type="submit">envoyer</button>
+                  <button type="submit">{form.submit}</button>
                 </p>
               </form>
             </FormArticle>
