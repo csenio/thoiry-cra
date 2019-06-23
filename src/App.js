@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./styles/globalStyles";
 import theme from "./styles/theme";
 import "./fonts/Inter (web)/inter.css";
-import HEADPHOTO from "./images/Thoiry_15.jpg";
+import HEADPHOTO from "./images/landing.JPG";
 import styled from "styled-components";
 import ImageModal from "./ImageModal";
 import messages from "./messages";
@@ -14,7 +14,7 @@ function importAll(r) {
 }
 
 const images = importAll(
-  require.context("./images", false, /\.(png|jpe?g|svg)$/)
+  require.context("./images", false, /\.(png|jpe?g|svg)$/i)
 );
 
 console.log(images);
