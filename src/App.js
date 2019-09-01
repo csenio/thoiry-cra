@@ -182,8 +182,6 @@ function App() {
             <Article>
               <H1>{title}</H1>
               <p>{content}</p>
-              <H1>{price.title}</H1>
-              <p>{price.content}</p>
               <H1>{contact.title}</H1>
               <p>{contact.content}</p>
             </Article>
